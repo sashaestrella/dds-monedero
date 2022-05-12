@@ -21,11 +21,6 @@ public abstract class Movimiento {
     return this.fecha.equals(fecha);
   }
 
-  public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta));
-    cuenta.agregarMovimiento(this);
-  }
-
   public abstract double calcularValor(Cuenta cuenta);
 
   public abstract boolean isDeposito();

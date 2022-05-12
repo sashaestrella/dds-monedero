@@ -35,8 +35,11 @@ public class Cuenta {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    new Extraccion(LocalDate.now(), cuanto).agregateA(this);
+    saldo += cuanto;
+    Extraccion unaExtraccion = new Extraccion(LocalDate.now(), cuanto);
+    movimientos.add(unaExtraccion);
   }
+
 
   public void sacar(double cuanto) {
     if (cuanto <= 0) {
@@ -52,7 +55,9 @@ public class Cuenta {
           + " diarios, límite: " + limite);
     }
 
-    new Extraccion(LocalDate.now(), cuanto).agregateA(this);
+    saldo -= cuanto;
+    Extraccion unaExtraccion = new Extraccion(LocalDate.now(), cuanto);
+    movimientos.add(unaExtraccion);
   }
 
   public void agregarMovimiento(Movimiento movimiento) {
