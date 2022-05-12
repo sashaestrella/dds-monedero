@@ -2,13 +2,13 @@ package dds.monedero.model;
 
 import java.time.LocalDate;
 
-public class Extraccion extends Movimiento {
-    public Extraccion(LocalDate fecha, double monto) {
+public class Deposito extends Movimiento {
+    public Deposito(LocalDate fecha, double monto) {
         this.fecha = fecha;
         this.monto = monto;
     }
 
     public boolean isDeposito() {
-        return false;
+        return true;
     }
 }
