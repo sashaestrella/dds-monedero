@@ -13,9 +13,7 @@ public class Deposito extends Movimiento {
 
     @Override
     public void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite) {
-        if (monto <= 0) {
-            throw new MontoNegativoException(monto + ": el monto a ingresar debe ser un valor positivo");
-        }
+        super.validarAplicacion(saldoCuenta, depositosDiarios, limite);
 
         if (depositosDiarios >= 3) {
             throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");

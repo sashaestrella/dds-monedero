@@ -1,5 +1,7 @@
 package dds.monedero.model;
 
+import dds.monedero.exceptions.MontoNegativoException;
+
 import java.time.LocalDate;
 
 public abstract class Movimiento {
@@ -21,7 +23,11 @@ public abstract class Movimiento {
     return this.fecha.equals(fecha);
   }
 
-  public abstract void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite);
+  public void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite) {
+    if (monto <= 0) {
+      throw new MontoNegativoException(monto + ": el monto a ingresar debe ser un valor positivo");
+    }
+  }
 
   protected abstract double montoAplicable();
 }
