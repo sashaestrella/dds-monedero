@@ -22,18 +22,10 @@ public class Cuenta {
     saldo = montoInicial;
   }
 
-  public void setMovimientos(List<Movimiento> movimientos) {
-    this.movimientos = movimientos;
-  }
-
   public void aplicarMovimiento(Movimiento unMovimiento) {
     unMovimiento.validarAplicacion(saldo, cantidadDepositosDiarios(), limiteDiario());
     movimientos.add(unMovimiento);
     saldo += unMovimiento.montoAplicable();
-  }
-
-  public void agregarMovimiento(Movimiento movimiento) {
-    movimientos.add(movimiento);
   }
 
   private long cantidadDepositosDiarios() {

@@ -1,7 +1,6 @@
 package dds.monedero.model;
 
 import dds.monedero.exceptions.MaximaCantidadDepositosException;
-import dds.monedero.exceptions.MontoNegativoException;
 
 import java.time.LocalDate;
 
