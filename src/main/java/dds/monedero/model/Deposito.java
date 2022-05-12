@@ -1,5 +1,8 @@
 package dds.monedero.model;
 
+import dds.monedero.exceptions.MaximaCantidadDepositosException;
+import dds.monedero.exceptions.MontoNegativoException;
+
 import java.time.LocalDate;
 
 public class Deposito extends Movimiento {
@@ -8,7 +11,18 @@ public class Deposito extends Movimiento {
         this.monto = monto;
     }
 
-    public boolean isDeposito() {
-        return true;
+    @Override
+    public void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite) {
+        if (monto <= 0) {
+            throw new MontoNegativoException(monto + ": el monto a ingresar debe ser un valor positivo");
+        }
+
+        if (depositosDiarios >= 3) {
+            throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
+        }
+    }
+
+    public double montoAplicable() {
+        return monto;
     }
 }

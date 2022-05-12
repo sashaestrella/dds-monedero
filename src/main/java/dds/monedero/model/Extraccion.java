@@ -1,5 +1,9 @@
 package dds.monedero.model;
 
+import dds.monedero.exceptions.MaximoExtraccionDiarioException;
+import dds.monedero.exceptions.MontoNegativoException;
+import dds.monedero.exceptions.SaldoMenorException;
+
 import java.time.LocalDate;
 
 public class Extraccion extends Movimiento {
@@ -8,7 +12,22 @@ public class Extraccion extends Movimiento {
         this.monto = monto;
     }
 
-    public boolean isDeposito() {
-        return false;
+    @Override
+    public void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite) {
+        if (monto <= 0) {
+            throw new MontoNegativoException(monto + ": el monto a ingresar debe ser un valor positivo");
+        }
+
+        if (saldoCuenta - monto < 0) {
+            throw new SaldoMenorException("No puede sacar mas de " + saldoCuenta + " $");
+        }
+
+        if (monto > limite) {
+            throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000 + " diarios, límite: " + limite);
+        }
+    }
+
+    public double montoAplicable() {
+        return monto * -1;
     }
 }

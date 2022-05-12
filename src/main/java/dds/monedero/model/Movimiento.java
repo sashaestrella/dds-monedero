@@ -21,5 +21,7 @@ public abstract class Movimiento {
     return this.fecha.equals(fecha);
   }
 
-  public abstract boolean isDeposito();
+  public abstract void validarAplicacion(double saldoCuenta, long depositosDiarios, double limite);
+
+  protected abstract double montoAplicable();
 }
